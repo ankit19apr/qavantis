@@ -14,7 +14,6 @@
 
 ## Architecture
 
-Place the full-flow architecture image at `docs/images/qavantis-architecture.png` for it to display below on GitHub.
 
 ![QAVANTIS full-flow architecture](docs/images/qavantis-architecture.png)
 
