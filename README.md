@@ -6,7 +6,7 @@
 **Intelligence Behind Every Release.**
 
 [![Status](https://img.shields.io/badge/status-planning-blue)](#project-status)
-[![Quality Engineering](https://img.shields.io/badge/focus-quality%20engineering-5b6ee1)](#scope)
+[![Focus](https://img.shields.io/badge/focus-quality%20engineering-5b6ee1)](#overview)
 
 </div>
 
@@ -14,29 +14,69 @@
 
 ## Architecture
 
-> Place the approved full-flow architecture image at `docs/images/qavantis-architecture.png` for it to render below on GitHub.
+Place the full-flow architecture image at `docs/images/qavantis-architecture.png` for it to display below on GitHub.
 
 ![QAVANTIS full-flow architecture](docs/images/qavantis-architecture.png)
 
 ## Overview
 
-QAVANTIS is a planned AI-powered quality engineering platform connecting requirements, test design, automation, execution intelligence, defect management, and release decisions in one traceable workflow.
+QAVANTIS is a planned AI-powered quality engineering platform connecting sprint planning, requirements, test design, automation, execution intelligence, defect management, and release decisions in one traceable workflow.
 
 AI can recommend and explain, but must not silently override required approvals or deterministic quality-gate rules.
 
-## Planned end-to-end flow
+## Core capabilities
 
-1. **Ingest inputs** — requirements, user stories, acceptance criteria, application changes, and existing test assets.
-2. **Analyze requirements** — identify business rules, risks, and acceptance-criteria coverage.
-3. **Design test cases** — generate steps, data, expected results, priorities, and requirement links.
-4. **Review and classify** — assess coverage and duplicates; require human approval where appropriate.
-5. **Recommend automation** — recommend `AUTOMATE`, `KEEP_MANUAL`, or `REVIEW`, with rationale.
-6. **Generate and run tests** — execute through framework-specific generators and runners.
-7. **Collect evidence** — results, screenshots, traces, logs, and environment metadata.
-8. **Triage failures** — distinguish likely application defects from automation, test-data, and environment issues.
-9. **Manage defects and retests** — prepare defect records, identify possible duplicates, track fixes, and verify retests.
-10. **Evaluate release gates** — apply explicit policies before allowing or blocking deployment.
-11. **Report quality** — coverage, execution results, defect trends, healing events, and release readiness.
+- Sprint Test Planner with file uploads and Jira integration.
+- AI-assisted requirement analysis and test-case generation.
+- Test-case review, traceability, coverage and duplicate analysis.
+- Automation suitability recommendations.
+- Three framework-specific automation generation and execution workflows.
+- Controlled self-healing locator support with evidence.
+- Defect triage, duplicate detection, retesting and closure tracking.
+- Deterministic quality gates for clean deployments.
+- Interactive dashboards, reports and release-readiness metrics.
+
+## Sprint Test Planner
+
+The Sprint Test Planner supports two planned input methods and two planned output formats.
+
+### Inputs
+
+- **File uploads:** Excel, CSV, and sprint/story documents.
+- **Jira integration:** sprint backlog, user stories, bugs, acceptance criteria, and available story metadata.
+
+### Planning capabilities
+
+- Summarize sprint scope and identify in-scope/out-of-scope work.
+- Map stories and acceptance criteria to proposed test cases.
+- Identify dependencies, risk areas, coverage gaps, and assumptions.
+- Recommend test effort and capacity allocation using available estimates and team capacity.
+- Plan Smoke, Sanity, and Regression coverage.
+- Recommend `AUTOMATE`, `KEEP_MANUAL`, or `REVIEW`, with rationale.
+- Draft test environments, test-data needs, entry/exit criteria, and unresolved risks.
+- Support QA lead review and approval before finalization.
+
+### Outputs
+
+1. **Sprint test plan document** — scope, strategy, coverage, risks, dependencies, estimates, environments, entry/exit criteria, and approvals.
+2. **Interactive sprint dashboard** — sprint scope, story/test traceability, coverage gaps, planned versus executed tests, status summaries, risks, and release readiness.
+
+AI-generated recommendations and estimates are advisory. The QA lead approves the final scope, effort, and exit criteria.
+
+## End-to-end workflow
+
+1. **Ingest inputs** — requirements, user stories, acceptance criteria, sprint details, application changes, and existing test assets.
+2. **Plan the sprint** — analyze backlog scope, risks, dependencies, capacity, and testing approach.
+3. **Analyze requirements** — identify business rules, risks, and acceptance-criteria coverage.
+4. **Design test cases** — generate steps, data, expected results, priorities, and requirement links.
+5. **Review and classify** — assess coverage and duplicates; require human approval where appropriate.
+6. **Recommend automation** — recommend `AUTOMATE`, `KEEP_MANUAL`, or `REVIEW`, with rationale.
+7. **Generate and run tests** — execute through framework-specific generators and runners.
+8. **Collect evidence** — results, screenshots, traces, logs, and environment metadata.
+9. **Triage failures** — distinguish likely application defects from automation, test-data, and environment issues.
+10. **Manage defects and retests** — prepare defect records, identify possible duplicates, track fixes, and verify retests.
+11. **Evaluate release gates** — apply explicit policies before allowing or blocking deployment.
+12. **Report quality** — coverage, execution results, defect trends, healing events, sprint progress, and release readiness.
 
 ## Automation frameworks
 
@@ -105,44 +145,55 @@ Release decisions should use explicit, auditable policies. Planned checks includ
 ## Planned architecture
 
 ```text
-Requirements / Changes / Existing Test Assets
-                    |
-                    v
-       Requirement Analysis & Test Design
-                    |
-                    v
-        Review, Traceability & Classification
-                    |
-                    v
-          Automation Suitability Engine
-                    |
-          +---------+----------+
-          |         |          |
-          v         v          v
-     Selenium   Selenium    Playwright
-     + TestNG   + Cucumber  + TypeScript
-          |         |          |
-          +---------+----------+
-                    |
-                    v
-       Execution Orchestration & Evidence
-                    |
-                    v
-      Failure Classification / Defect Triage
-                    |
-                    v
-          Retest & Defect Lifecycle
-                    |
-                    v
-        Deterministic Quality Gate Engine
-                    |
-             +------+------+
-             |             |
-             v             v
-       Allow release   Block release
-                    |
-                    v
-       Dashboard, Metrics & Notifications
+Sprint Backlog / Requirements / Changes / Test Assets
+                         |
+                         v
+              Sprint Test Planner
+           (File Uploads + Jira Integration)
+                         |
+             +-----------+-----------+
+             |                       |
+             v                       v
+       Test Plan Document      Interactive Dashboard
+             |                       |
+             +-----------+-----------+
+                         |
+                         v
+         Requirement Analysis & Test Design
+                         |
+                         v
+         Review, Traceability & Classification
+                         |
+                         v
+             Automation Suitability
+                         |
+              +----------+----------+
+              |          |          |
+              v          v          v
+         Selenium    Selenium   Playwright
+         + TestNG    + Cucumber + TypeScript
+              |          |          |
+              +----------+----------+
+                         |
+                         v
+          Execution Orchestration & Evidence
+                         |
+                         v
+           Failure Classification / Triage
+                         |
+                         v
+                Retest & Defect Lifecycle
+                         |
+                         v
+             Deterministic Quality Gates
+                         |
+                  +------+------+
+                  |             |
+                  v             v
+             Allow release  Block release
+                         |
+                         v
+            Metrics, Reports & Notifications
 ```
 
 ## Planned technology choices
@@ -153,7 +204,7 @@ The implementation will be incremental and local-first/cost-conscious, starting 
 - **Orchestration:** n8n; test runners execute as separate processes
 - **Persistence:** PostgreSQL as the planned source of truth
 - **CI/CD:** GitHub Actions
-- **Integrations:** Jira, GitHub, Slack/email, test management, artifact storage, optional security tooling
+- **Inputs and integrations:** Jira, Excel/CSV/document uploads, GitHub, Slack/email, test management, artifact storage, optional security tooling
 - **AI:** provider-independent interfaces with local/mock implementations for early development
 
 Never commit secrets, embed them in prompts, or write them to logs.
@@ -173,6 +224,10 @@ qavantis/
 │   ├── architecture.md
 │   ├── implementation-roadmap.md
 │   └── data-model.md
+├── sprint-planner/
+│   ├── imports/
+│   ├── planning/
+│   └── reporting/
 ├── workflows/n8n/
 ├── database/migrations/
 ├── generators/
@@ -191,20 +246,21 @@ This is the intended structure, not a claim that these components or workflows h
 ## Delivery roadmap
 
 1. Repository conventions, architecture docs, and shared schemas.
-2. Requirement-to-test-case design and human review.
-3. Persistence, traceability, and manual execution tracking.
-4. Automation-suitability recommendations.
-5. Selenium + Java + TestNG generator and runner.
-6. Selenium + Cucumber + TestNG generator and runner.
-7. Playwright + TypeScript generator and runner.
-8. Evidence capture and controlled self-healing.
-9. Integrate existing n8n defect triage and add retest tracking.
-10. Deterministic quality gates and GitHub Actions.
-11. Dashboards, reports, and operational safeguards.
+2. Sprint Planner intake, plan generation, and human review.
+3. Requirement-to-test-case design and traceability.
+4. Persistence and manual execution tracking.
+5. Automation-suitability recommendations.
+6. Selenium + Java + TestNG generator and runner.
+7. Selenium + Cucumber + TestNG generator and runner.
+8. Playwright + TypeScript generator and runner.
+9. Evidence capture and controlled self-healing.
+10. Integrate existing n8n defect triage and add retest tracking.
+11. Deterministic quality gates and GitHub Actions.
+12. Interactive dashboards, sprint reports, and operational safeguards.
 
 ## Project status
 
-**Planning / architecture stage.** Implementation, GitHub Actions workflows, repository creation, and deployment gates should be marked complete only after they have been built and verified.
+**Planning / architecture stage.** QAVANTIS and the Sprint Test Planner are planned; implementation, GitHub Actions workflows, integrations, and deployment gates should be marked complete only after they have been built and verified.
 
 ## Contributing
 
